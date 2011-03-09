@@ -1,1 +1,54 @@
+===================
+polymaps-extensions
+===================
 
+A set of extensions for `polymaps <http://polymaps.org>`_, 
+by `Makina Corpus <http://makina-corpus.com>`_.
+
+Overview
+========
+
+po.mcmap
+--------
+A map which automatically saves its state (zoom, location) using cookies.
+
+    map = po.mcmap()
+
+
+po.checkbrowser
+---------------
+A browser compatibility check for polymaps.
+
+    po.checkbrowser("browser-fallback");
+
+    <div id="browser-fallback">
+      <h3>Your browser looks incompatible</h3>
+    </div>
+
+
+po.switcher
+-----------
+A layer switcher for polymaps.
+
+    var layers = {
+        "title1" : 
+        po.image()
+          .url(po.url("http://server1/{Z}/{X}/{Y}.png"))
+          .id('layer1'),
+
+        "title2" :
+        po.image()
+          .url(po.url("http://server2/{Z}/{X}/{Y}.png"))
+          .id('layer2'),
+    };
+    po.switcher(map, layers, {title : 'Base Layer'})
+      .container(document.getElementById("layerswitcher"));
+
+
+    <div id="layerswitcher"></div>
+
+
+
+Author
+======
+* Mathieu Leplatre <mathieu.leplatre@makina-corpus.com>
