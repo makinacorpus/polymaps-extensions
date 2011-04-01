@@ -1,3 +1,6 @@
+if (!org) var org = {};
+if (!org.polymaps) org.polymaps = {};
+
 (function(po) {
   po.mcmap = function() {
     var mcmap = po.map();
