@@ -123,6 +123,71 @@ if (!org.polymaps) org.polymaps = {};
 })(org.polymaps);
 
 
+
+(function(po) {
+  po.toggler = function(m, l, o) {
+    var self = {},
+        map,
+        layers,
+        options;
+
+    map = m;
+    layers = l;
+    options = o ? o : {};
+    if (!options.title) options.title = 'Vector Layers';
+
+    /* toggle layer */
+    self.toggle = function (name) {
+        var l = layers[name];
+        if (!l.map()) {
+            map.add(l);
+            l.visible(true);
+        }
+        var visible = l.visible();
+        l.visible(!visible);
+    }
+
+    self.container = function (elt) {
+        // Create Legend manipulating the DOM
+        var main = elt;
+        var list = document.createElement('div');
+        list.setAttribute('id', 'togglelayer-list');
+        // For each layer, create a <input>
+        for (name in layers) {
+            var layerid = layers[name].id();
+            var input = document.createElement('input');
+            input.setAttribute('id', 'togglelayer-' + layerid);
+            input.setAttribute('name', 'togglelayer');
+            input.setAttribute('type', 'checkbox');
+            input.setAttribute('value', name);
+            if (layers[name].map() && layers[name].visible()) input.setAttribute('checked', '');
+
+            // Link onChange event on checkbox
+            input.onchange = function () {
+                self.toggle(this.getAttribute('value'));
+            };
+            var label = document.createElement('label');
+            label.setAttribute('for', 'togglelayer-' + layerid);
+            label.innerHTML = name;
+
+            var item = document.createElement('div');
+            item.appendChild(input);
+            item.appendChild(label);
+            list.appendChild(item);
+        }
+        var title = document.createElement('div');
+        title.setAttribute('id', 'togglelayer-title');
+        title.innerHTML = options.title;
+        main.appendChild(title);
+        main.appendChild(list);
+        return self;
+    }
+
+    return self;
+  };
+})(org.polymaps);
+
+
 (function(po) {
   po.checkbrowser = function(eltid) {
 

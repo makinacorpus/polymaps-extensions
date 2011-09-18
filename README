@@ -47,6 +47,27 @@ A layer switcher for polymaps.
 
     <div id="layerswitcher"></div>
 
+po.toggler
+----------
+A layer toggler for polymaps.
+
+    var layers = {
+        "title1" : 
+        po.geoJson()
+          .url("http://polymaps.appspot.com/state/{Z}/{X}/{Y}.json")
+          .id('state'),
+
+        "title2" :
+        po.image()
+          .url("http://polymaps.appspot.com/county/{Z}/{X}/{Y}.json")
+          .id('county'),
+    };
+    po.toggler(map, layers, {title : 'Vector Layers'})
+      .container(document.getElementById("layerstoggler"));
+
+
+    <div id="layerstoggler"></div>
+
 
 
 Author
